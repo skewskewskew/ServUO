@@ -84,7 +84,7 @@ namespace Server.Spells
             Register(60, typeof(Eighth.SummonDaemonSpell));
             Register(61, typeof(Eighth.EarthElementalSpell));
             Register(62, typeof(Eighth.FireElementalSpell));
-            Register(63, typeof(Eighth.WaterElementalSpell));
+			Register(63, typeof(Eighth.WaterElementalSpell));
 
             // Necromancy spells
             Register(100, typeof(Necromancy.AnimateDeadSpell));

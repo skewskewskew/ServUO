@@ -50,6 +50,8 @@ namespace Server.Spells
 
         public virtual SkillName CastSkill => SkillName.Magery;
         public virtual SkillName DamageSkill => SkillName.EvalInt;
+		public virtual SkillName CompanionSkill => SkillName.EvalInt;
+		public virtual SkillName DefenseSkill => SkillName.MagicResist;
 
         public virtual bool RevealOnCast => true;
         public virtual bool ClearHandsOnCast => true;
@@ -671,7 +673,7 @@ namespace Server.Spells
 
         public virtual bool Cast()
         {
-            if (m_Caster.Spell is Spell && ((Spell)m_Caster.Spell).State == SpellState.Sequencing)
+            if (m_Caster.Spell is Spell && ((Spell)m_Caster.Spell).State == SpellState.Sequencing) // non, casting, sequencing
             {
                 ((Spell)m_Caster.Spell).Disturb(DisturbType.NewCast);
             }
@@ -865,28 +867,42 @@ namespace Server.Spells
         public virtual void SendCastEffect()
         { }
 
-        public virtual void GetCastSkills(out double min, out double max)
+        public virtual void GetCastSkills(out double min, out double max, out double compmin, out double compmax)
         {
-            min = max = 0; //Intended but not required for overriding.
+            min = max = compmin = compmax = 0; //Intended but not required for overriding.
         }
 
-        public virtual bool CheckFizzle()
+		public virtual void GetCastSkills(out double min, out double max)
+		{
+			min = max = 0; //Intended but not required for overriding.
+		}
+
+		public virtual bool CheckFizzle()
         {
             if (m_Scroll is BaseWand)
             {
                 return true;
             }
 
-            double minSkill, maxSkill;
+            double minSkill, maxSkill, minCompanionSkill, maxCompanionSkill;
 
-            GetCastSkills(out minSkill, out maxSkill);
+            GetCastSkills(out minSkill, out maxSkill, out minCompanionSkill, out maxCompanionSkill);
 
             if (DamageSkill != CastSkill && DamageSkill != SkillName.Imbuing)
             {
-                Caster.CheckSkill(DamageSkill, 0.0, Caster.Skills[DamageSkill].Cap);
+                Caster.CheckSkill(DamageSkill, 0.0, Caster.Skills[DamageSkill].Cap); // Check to see if you gain skill?
             }
 
-            bool skillCheck = Caster.CheckSkill(CastSkill, minSkill, maxSkill);
+			bool companionSkillCheck = true;
+
+			if (CompanionSkill != CastSkill)
+			{
+				companionSkillCheck = Caster.CheckSkill(CompanionSkill, minCompanionSkill, maxCompanionSkill);
+			}
+
+			bool skillCheck = Caster.CheckSkill(CastSkill, minSkill, maxSkill);
+			if (skillCheck & companionSkillCheck)
+				skillCheck = true;
 
             return Caster is BaseCreature || skillCheck;
         }
