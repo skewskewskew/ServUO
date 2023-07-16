@@ -5514,7 +5514,18 @@ namespace Server
 			switch (version)
 			{
 				case 39:
+					{
+						m_ESLevel = reader.ReadInt();
+						m_ESMaxLevel = reader.ReadInt();
+						m_ESToNextLevel = reader.ReadInt();
+						m_ESLevelSpent = reader.ReadInt();
+
+						goto case 38;
+					}
 				case 38:
+					{
+						goto case 37;
+					}
 				case 37:
 					{
 						m_DisplayGuildAbbr = reader.ReadBool();
@@ -6010,8 +6021,12 @@ namespace Server
 		public virtual void Serialize(GenericWriter writer)
 		{
 			writer.Write(39); // version
-
-			// 39 - Merge sync
+			
+			// 39 - Skew's updates for the Experience System
+			writer.Write((int)m_ESLevel);
+			writer.Write((int)m_ESMaxLevel);
+			writer.Write((int)m_ESToNextLevel);
+			writer.Write((int)m_ESLevelSpent);
 
 			// 38 - Removed Disarm/Stun Ready
 
@@ -12619,6 +12634,24 @@ namespace Server
 		public int StatTotal => Str + Dex + Int;
 
 		public long NextSpellTime { get; set; }
+
+		//Skew's Experience System Stuff
+		#region ESSystem
+		private int m_ESLevel = 1;
+		private int m_ESMaxLevel = 20;
+		private int m_ESToNextLevel = 1000;
+		private int m_ESLevelSpent = 0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int ESLevel { get => m_ESLevel; set => m_ESLevel = value; }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int ESMaxLevel { get => m_ESMaxLevel; set => m_ESMaxLevel = value; }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int ESToNextLevel { get => m_ESToNextLevel; set => m_ESToNextLevel = value; }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int ESLevelSpent { get => m_ESLevelSpent; set => m_ESLevelSpent = value; }
+		#endregion
+
 
 		/// <summary>
 		///     Overridable. Virtual event invoked when the sector this Mobile is in gets <see cref="Sector.Activate">activated</see>.

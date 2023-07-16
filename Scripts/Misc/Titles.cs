@@ -7,21 +7,23 @@ using System.Text;
 
 namespace Server.Misc
 {
-    public class Titles
+    public class Titles // This system has been hijacked and converted to an experience system.
     {
         public const int MinFame = 0;
-        public const int MaxFame = 32000;
+        public const int MaxFame = 160000;
 
-        public static void AwardFame(Mobile m, int offset, bool message)
+        public static void AwardFame(Mobile m, int offset, bool message) // offset should be mob's fame / 100
         {
-            int fame = m.Fame;
+            int fame = m.Fame; // lifetime experience gained
+			int level = m.ESLevel; // current level
+			int maxlevel = m.ESMaxLevel; // mobile's max level
 
             if (offset > 0)
             {
                 if (fame >= MaxFame)
                     return;
 
-                offset -= fame / 100;
+                offset -= fame / 100; 
 
                 if (offset < 0)
                     offset = 0;
@@ -44,26 +46,49 @@ namespace Server.Misc
 
             m.Fame += offset;
 
-            if (message)
-            {
-                if (offset > 40)
-                    m.SendLocalizedMessage(1019054); // You have gained a lot of fame.
-                else if (offset > 20)
-                    m.SendLocalizedMessage(1019053); // You have gained a good amount of fame.
-                else if (offset > 10)
-                    m.SendLocalizedMessage(1019052); // You have gained some fame.
-                else if (offset > 0)
-                    m.SendLocalizedMessage(1019051); // You have gained a little fame.
-                else if (offset < -40)
-                    m.SendLocalizedMessage(1019058); // You have lost a lot of fame.
-                else if (offset < -20)
-                    m.SendLocalizedMessage(1019057); // You have lost a good amount of fame.
-                else if (offset < -10)
-                    m.SendLocalizedMessage(1019056); // You have lost some fame.
-                else if (offset < 0)
-                    m.SendLocalizedMessage(1019055); // You have lost a little fame.
-            }
-        }
+
+
+			// Trigger check level
+			// Add in "level" variable for player? Then do xp to level at Level * 1000. When you gain, check if you level up. If you do, store the extra nd check again
+			// If you level, clear your exp number
+			// Need a Max Level stat -- is this variable?
+			if (level < maxlevel)
+			{
+				if (offset < m.ESToNextLevel)
+					 m.ESToNextLevel -= offset;
+
+				while (offset >= m.ESToNextLevel) // do the level up thing
+				{
+					offset -= m.ESToNextLevel;
+					m.ESLevel++;
+					m.ESToNextLevel = (m.ESLevel * 1000);
+					m.SendMessage("Congratulations! You've gained a level! Use [LevelUp when you're ready.");
+				}
+				
+			}
+
+			if (message)
+			{
+				m.SendMessage("You have gained experience: " + offset + "Xp to next level: " + m.ESToNextLevel);
+				//if (offset > 40)
+				//    m.SendLocalizedMessage(1019054); // You have gained a lot of fame.
+				//else if (offset > 20)
+				//    m.SendLocalizedMessage(1019053); // You have gained a good amount of fame.
+				//else if (offset > 10)
+				//    m.SendLocalizedMessage(1019052); // You have gained some fame.
+				//else if (offset > 0)
+				//    m.SendLocalizedMessage(1019051); // You have gained a little fame.
+				//else if (offset < -40)
+				//    m.SendLocalizedMessage(1019058); // You have lost a lot of fame.
+				//else if (offset < -20)
+				//    m.SendLocalizedMessage(1019057); // You have lost a good amount of fame.
+				//else if (offset < -10)
+				//    m.SendLocalizedMessage(1019056); // You have lost some fame.
+				//else if (offset < 0)
+				//    m.SendLocalizedMessage(1019055); // You have lost a little fame.
+			}
+
+		}
 
         public const int MinKarma = -32000;
         public const int MaxKarma = 32000;
