@@ -3,7 +3,7 @@ using Server.Targeting;
 namespace Server.Spells.Hedge
 
 {
-    public class PoisonSpell : MagerySpell
+    public class PoisonSpell : NewSpell
     {
         private static readonly SpellInfo m_Info = new SpellInfo(
             "Poison", "In Nox",
@@ -11,7 +11,11 @@ namespace Server.Spells.Hedge
             9051,
             Reagent.Nightshade);
 
-        public override SpellCircle Circle => SpellCircle.Third;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
 
         public PoisonSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
@@ -40,7 +44,7 @@ namespace Server.Spells.Hedge
 
                 m.Paralyzed = false;
 
-                if (CheckResisted(m) || Mysticism.StoneFormSpell.CheckImmunity(m))
+                if (CheckResisted(m) || Hedge.StoneFormSpell.CheckImmunity(m))
                 {
                     m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
                 }

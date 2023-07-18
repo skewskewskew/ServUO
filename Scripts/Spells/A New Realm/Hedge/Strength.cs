@@ -4,7 +4,7 @@ using System;
 namespace Server.Spells.Hedge
 
 {
-    public class StrengthSpell : MagerySpell
+    public class StrengthSpell : NewSpell
     {
         private static readonly SpellInfo m_Info = new SpellInfo(
             "Strength", "Uus Mani",
@@ -17,7 +17,11 @@ namespace Server.Spells.Hedge
         {
         }
 
-        public override SpellCircle Circle => SpellCircle.Second;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
 
         public override void OnCast()
         {

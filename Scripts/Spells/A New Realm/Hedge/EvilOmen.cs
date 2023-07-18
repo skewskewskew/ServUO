@@ -23,11 +23,14 @@ namespace Server.Spells.Hedge
         {
         }
 
-		public override SpellCircle Circle => SpellCircle.Third;
-		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.0);
-        public override double RequiredSkill => 20.0;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
         public override int RequiredMana => 11;
-		public override double RequiredCompanionSkill => 50.0;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
+
+		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.0);
+
 		/*
         * The naming here was confusing. Its a 1-off effect spell.
         * So, we dont actually "checkeffect"; we endeffect with bool

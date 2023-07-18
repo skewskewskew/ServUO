@@ -19,13 +19,14 @@ namespace Server.Spells.Hedge
         {
         }
 
-		public override SpellCircle Circle => SpellCircle.Third;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
 
-		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(2.25);
-        public override double RequiredSkill => 65.0;
-        public override int RequiredMana => 29;
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(2.25);
 
-		public override double RequiredCompanionSkill => 50.0;
 
 		public static bool UnderEffects(Mobile m)
         {

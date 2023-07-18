@@ -61,11 +61,11 @@ namespace Server.Spells.Hedge
                 SpellHelper.Turn(Caster, m);
                 SpellHelper.CheckReflect(this, Caster, ref m);
 
-                if (Mysticism.StoneFormSpell.CheckImmunity(m))
-                {
-                    Caster.SendLocalizedMessage(1080192); // Your target resists your ability reduction magic.
-                    return;
-                }
+                //if (Mysticism.StoneFormSpell.CheckImmunity(m))
+                //{
+                //    Caster.SendLocalizedMessage(1080192); // Your target resists your ability reduction magic.
+                //    return;
+                //}
 
                 int oldOffset = SpellHelper.GetCurseOffset(m, StatType.Dex);
                 int newOffset = SpellHelper.GetOffset(Caster, m, StatType.Dex, true, false);

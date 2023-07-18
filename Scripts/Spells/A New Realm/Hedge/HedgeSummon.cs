@@ -11,6 +11,12 @@ namespace Server.Spells.Hedge
         {
         }
 
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
+
         public abstract int Sound { get; }
         public override bool CheckCast()
         {

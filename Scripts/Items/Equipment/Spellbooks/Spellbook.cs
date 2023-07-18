@@ -23,6 +23,7 @@ namespace Server.Items
         Arcanist,
         Mystic,
         SkillMasteries,
+        Hedge
     }
 
     public enum BookQuality
@@ -412,6 +413,10 @@ namespace Server.Items
             {
                 return SpellbookType.SkillMasteries;
             }
+            else if (spellID >= 800 && spellID < 864)
+            {
+                return SpellbookType.Hedge; //adding hedge
+            }
 
             return SpellbookType.Invalid;
         }
@@ -447,6 +452,11 @@ namespace Server.Items
         }
 
         public static Spellbook FindMystic(Mobile from)
+        {
+            return Find(from, -1, SpellbookType.Mystic);
+        }
+
+        public static Spellbook FindHedge(Mobile from) //adding hedge
         {
             return Find(from, -1, SpellbookType.Mystic);
         }
