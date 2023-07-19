@@ -16,11 +16,16 @@ namespace Server.Spells.Hedge
             : base(caster, scroll, m_Info)
         {
         }
-		public override SpellCircle Circle => SpellCircle.Sixth;
-		public override double RequiredCompanionSkill => 50.0;
+
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
+
+
 		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.5);
-        public override double RequiredSkill => 0.0;
-        public override int RequiredMana => 24;
+
         public override bool CheckCast()
         {
             if (!base.CheckCast())

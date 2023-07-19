@@ -4,7 +4,7 @@ using System;
 namespace Server.Spells.Hedge
 
 {
-    public class CreateFoodSpell : MagerySpell
+    public class CreateFoodSpell : NewSpell
     {
         private static readonly SpellInfo m_Info = new SpellInfo(
             "Create Food", "In Mani Ylem",
@@ -32,6 +32,11 @@ namespace Server.Spells.Hedge
         }
 
         public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
+
         public override void OnCast()
         {
             if (CheckSequence())

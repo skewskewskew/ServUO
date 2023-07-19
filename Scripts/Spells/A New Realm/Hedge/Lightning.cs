@@ -3,7 +3,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Hedge
 {
-    public class LightningSpell : MagerySpell
+    public class LightningSpell : NewSpell
     {
         private static readonly SpellInfo m_Info = new SpellInfo(
             "Lightning", "Por Ort Grav",
@@ -16,7 +16,12 @@ namespace Server.Spells.Hedge
         {
         }
 
-        public override SpellCircle Circle => SpellCircle.Fourth;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
+
         public override bool DelayedDamage => false;
         public override void OnCast()
         {

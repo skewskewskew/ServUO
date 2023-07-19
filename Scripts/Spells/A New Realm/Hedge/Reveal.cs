@@ -1,9 +1,10 @@
+using Server.Spells.Sixth;
 using Server.Targeting;
 using System.Collections.Generic;
 
 namespace Server.Spells.Hedge
 {
-    public class RevealSpell : MagerySpell
+    public class RevealSpell : NewSpell
     {
         private static readonly SpellInfo m_Info = new SpellInfo(
             "Reveal", "Wis Quas",
@@ -16,7 +17,12 @@ namespace Server.Spells.Hedge
         {
         }
 
-        public override SpellCircle Circle => SpellCircle.Sixth;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
+
         public override void OnCast()
         {
             Caster.Target = new InternalTarget(this);

@@ -17,7 +17,7 @@ namespace Server.Spells
 		public abstract double RequiredSkill { get; }
 		public abstract double RequiredCompanionSkill { get; }
 		public abstract int RequiredMana { get; }
-		//public abstract int RequiredTithing { get; }
+		//public abstract int RequiredTithing { get; } //For chivalry spells
 		public override SkillName CastSkill => SkillName.Magery;
 		public override SkillName DamageSkill => SkillName.EvalInt;
 		public override SkillName CompanionSkill => SkillName.EvalInt;

@@ -12,12 +12,13 @@ namespace Server.Spells.Hedge
 {
     public class CleansingWindsSpell : NewSpell
     {
-        public override SpellCircle Circle => SpellCircle.Sixth;
-		public override int RequiredMana => 11;
-		public override double RequiredCompanionSkill => 50.0;
-		public override double RequiredSkill => 20.0;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
 
-		private static readonly SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
             "Cleansing Winds", "In Vas Mani Hur",
             230,
             9022,

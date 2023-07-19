@@ -2,7 +2,7 @@ using Server.Network;
 using System;
 using System.Collections.Generic;
 
-namespace Server.Spells.Mysticism
+namespace Server.Spells.Hedge
 {
     public class StoneFormSpell : MysticTransformationSpell
     {
@@ -23,7 +23,11 @@ namespace Server.Spells.Mysticism
 
         private int m_ResisMod;
 
-        public override SpellCircle Circle => SpellCircle.Fourth;
+        public override SpellCircle Circle => SpellCircle.First;
+        public override double RequiredSkill => 10;
+        public override int RequiredMana => 11;
+        public override SkillName CompanionSkill => SkillName.Camping;
+        public override double RequiredCompanionSkill => 50.0;
 
         public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(2.0);
 
