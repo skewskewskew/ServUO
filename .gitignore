@@ -66,3 +66,5 @@
 
 # Exclude Data Files
 /Data/PVPTournamentSystemData
+Config/Accounts.cfg
+Config/Server.cfg

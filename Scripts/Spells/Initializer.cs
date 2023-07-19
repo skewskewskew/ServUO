@@ -215,7 +215,24 @@ namespace Server.Spells
             Register(741, typeof(SkillMasteries.PassiveMasterySpell));
             Register(742, typeof(SkillMasteries.WhisperingSpell));
             Register(743, typeof(SkillMasteries.CombatTrainingSpell));
-        }
+
+			Register(800, typeof(Hedge.ClumsySpell));
+			Register(801, typeof(Hedge.CreateFoodSpell));
+			Register(802, typeof(Hedge.CureSpell));
+			Register(803, typeof(Hedge.HarmSpell));
+			Register(804, typeof(Hedge.StrengthSpell));
+			Register(805, typeof(Hedge.BlessSpell));
+			Register(806, typeof(Hedge.PoisonSpell));
+			Register(807, typeof(Hedge.LightningSpell));
+			Register(808, typeof(Hedge.RevealSpell));
+			Register(809, typeof(Hedge.EvilOmenSpell));
+			Register(810, typeof(Hedge.StrangleSpell));
+			Register(811, typeof(Hedge.StoneFormSpell));
+			Register(812, typeof(Hedge.CleansingWindsSpell));
+			Register(813, typeof(Hedge.GiftOfRenewalSpell));
+			Register(814, typeof(Hedge.NatureFurySpell));
+			Register(815, typeof(Hedge.SummonFeySpell));
+		}
 
         public static void Register(int spellID, Type type)
         {

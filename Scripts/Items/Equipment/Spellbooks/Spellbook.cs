@@ -378,7 +378,7 @@ namespace Server.Items
         }
         #endregion
 
-        public static SpellbookType GetTypeForSpell(int spellID)
+        public static SpellbookType GetTypeForSpell(int spellID) // all spells have an id, book type is tied to number.
         {
             if (spellID >= 0 && spellID < 64)
             {
@@ -416,7 +416,7 @@ namespace Server.Items
             return SpellbookType.Invalid;
         }
 
-        public static Spellbook FindRegular(Mobile from)
+        public static Spellbook FindRegular(Mobile from) // find your spellbook
         {
             return Find(from, -1, SpellbookType.Regular);
         }
