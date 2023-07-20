@@ -8,7 +8,6 @@ namespace Server.Spells
 		private int m_CastTimeFocusLevel;
 
 		private static readonly int[] m_ManaTable = new int[] { 4, 6, 9, 11, 14, 20, 40, 50 };
-        private const double ChanceOffset = 20.0, ChanceLength = 100.0 / 7.0;
         public NewSpell(Mobile caster, Item scroll, SpellInfo info)
             : base(caster, scroll, info)
         {
@@ -29,6 +28,9 @@ namespace Server.Spells
         public override TimeSpan CastDelayBase => TimeSpan.FromMilliseconds(((4 + (int)Circle) * CastDelaySecondsPerTick) * 1000);
         public override bool ConsumeReagents()
         {
+            if (Caster.Skills[CastSkill].Value > RequiredSkill + 20) // If you have 20 more than required, no regs needed.
+                return true;
+
             if (base.ConsumeReagents())
                 return true;
 

@@ -5,7 +5,7 @@ namespace Server.Spells
 {
     public class SpellRegistry
     {
-        private static readonly Type[] m_Types = new Type[745];
+        private static readonly Type[] m_Types = new Type[945];
         private static int m_Count;
 
         public static Type[] Types
@@ -148,8 +148,9 @@ namespace Server.Spells
             "Mystic",
             #endregion
             #region TOL
-            "SkillMasteries"
+            "SkillMasteries",
             #endregion
+            "Hedge"
         };
 
         public static Spell NewSpell(string name, Mobile caster, Item scroll)
